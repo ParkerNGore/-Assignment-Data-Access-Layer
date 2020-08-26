@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Parker",
+    "level": 1,
+    "class": "Paladin",
+    "race": "Human"
+  },
+  {
+    "name": "Shawn",
+    "level": 1,
+    "class": "Fighter",
+    "race": "Elf"
+  }
+]
