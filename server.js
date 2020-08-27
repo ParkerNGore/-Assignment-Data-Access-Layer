@@ -74,6 +74,20 @@ app.post("/api/characters", async (request, response) => {
     return;
   }
 
+  if (typeof body.alignment !== "string") {
+    response
+      .status(400)
+      .send("The alignment name parameter must be of type string");
+    return;
+  }
+
+  if (typeof body.background !== "string") {
+    response
+      .status(400)
+      .send("The background name parameter must be of type string");
+    return;
+  }
+
   await dataAccessLayer.insertOne(body);
 
   response.status(201).send();
@@ -99,6 +113,14 @@ app.put("/api/characters/:id", async (request, response) => {
   }
   if (body.race && typeof body.race !== "string") {
     response.status(400).send("The race parameter must be of type string");
+  }
+  if (body.background && typeof body.background !== "string") {
+    response
+      .status(400)
+      .send("The background parameter must be of type string");
+  }
+  if (body.alignment && typeof body.alignment !== "string") {
+    response.status(400).send("The alignment parameter must be of type string");
   }
 
   const characterQuery = {

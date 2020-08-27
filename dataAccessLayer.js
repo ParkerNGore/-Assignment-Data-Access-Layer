@@ -117,6 +117,14 @@ const updateOne = function (query, newCharacter) {
     newCharacterQuery.class = newCharacter.class;
   }
 
+  if (newCharacter.background) {
+    newCharacterQuery.background = newCharacter.background;
+  }
+
+  if (newCharacter.alignment) {
+    newCharacterQuery.alignment = newCharacter.alignment;
+  }
+
   return new Promise((resolve, reject) => {
     characterCollection.updateOne(
       query,

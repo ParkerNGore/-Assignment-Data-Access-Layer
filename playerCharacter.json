@@ -3,12 +3,16 @@
     "name": "Parker",
     "level": 1,
     "class": "Paladin",
-    "race": "Human"
+    "race": "Human",
+    "background": "Acolyte",
+    "alignment": "Lawful Good"
   },
   {
     "name": "Shawn",
     "level": 1,
     "class": "Fighter",
-    "race": "Elf"
+    "race": "Elf",
+    "background": "Soldier",
+    "alignment": "Neutral"
   }
 ]
