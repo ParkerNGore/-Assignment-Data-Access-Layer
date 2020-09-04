@@ -18,7 +18,7 @@ app.get("/api/characters", async (request, response) => {
   response.send(characters);
 });
 
-app.get("api/characters/:id", async (request, response) => {
+app.get("/api/characters/:id", async (request, response) => {
   const characterId = request.params.id;
 
   if (!ObjectID.isValid(characterId)) {
@@ -26,13 +26,12 @@ app.get("api/characters/:id", async (request, response) => {
     return;
   }
 
-  const charcterQuery = {
+  const characterQuery = {
     _id: new ObjectId(characterId),
   };
   let character;
-
   try {
-    character = await dataAccessLayer.findOne(charcterQuery);
+    character = await dataAccessLayer.findOne(characterQuery);
   } catch (error) {
     response.status(404).send(`Character with id ${characterId} not found!`);
     return;
