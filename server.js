@@ -42,7 +42,16 @@ app.get("/api/characters/:id", async (request, response) => {
 app.post("/api/characters", async (request, response) => {
   const body = request.body;
 
-  if (!body.name || !body.level || !body.class || !body.race) {
+  if (
+    !body.name ||
+    !body.level ||
+    !body.class ||
+    !body.race ||
+    !body.subclass ||
+    !body.subrace ||
+    !body.alignment ||
+    !body.background
+  ) {
     response
       .status(400)
       .send(
@@ -62,21 +71,27 @@ app.post("/api/characters", async (request, response) => {
   }
 
   if (typeof body.class !== "string") {
-    response
-      .status(400)
-      .send("The class name parameter must be of type string");
+    response.status(400).send("The class parameter must be of type string");
+    return;
+  }
+
+  if (typeof body.subclass !== "string") {
+    response.status(400).send("The subclass parameter must be of type string");
     return;
   }
 
   if (typeof body.race !== "string") {
-    response.status(400).send("The race name parameter must be of type string");
+    response.status(400).send("The race parameter must be of type string");
+    return;
+  }
+
+  if (typeof body.subrace !== "string") {
+    response.status(400).send("The subrace parameter must be of type string");
     return;
   }
 
   if (typeof body.alignment !== "string") {
-    response
-      .status(400)
-      .send("The alignment name parameter must be of type string");
+    response.status(400).send("The alignment parameter must be of type string");
     return;
   }
 
@@ -110,8 +125,14 @@ app.put("/api/characters/:id", async (request, response) => {
   if (body.class && typeof body.class !== "string") {
     response.status(400).send("The class parameter must be of type string");
   }
+  if (body.class && typeof body.subclass !== "string") {
+    response.status(400).send("The subclasse parameter must be of type string");
+  }
   if (body.race && typeof body.race !== "string") {
     response.status(400).send("The race parameter must be of type string");
+  }
+  if (body.race && typeof body.subrace !== "string") {
+    response.status(400).send("The subrace parameter must be of type string");
   }
   if (body.background && typeof body.background !== "string") {
     response

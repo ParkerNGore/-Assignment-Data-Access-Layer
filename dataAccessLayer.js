@@ -113,8 +113,16 @@ const updateOne = function (query, newCharacter) {
     newCharacterQuery.race = newCharacter.race;
   }
 
+  if (newCharacter.subrace) {
+    newCharacterQuery.subrace = newCharacter.subrace;
+  }
+
   if (newCharacter.class) {
     newCharacterQuery.class = newCharacter.class;
+  }
+
+  if (newCharacter.subclass) {
+    newCharacterQuery.subclass = newCharacter.subclass;
   }
 
   if (newCharacter.background) {
