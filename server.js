@@ -50,7 +50,13 @@ app.post("/api/characters", async (request, response) => {
     !body.subclass ||
     !body.subrace ||
     !body.alignment ||
-    !body.background
+    !body.background ||
+    !body.attributes.constitution ||
+    !body.attributes.strength ||
+    !body.attributes.dexterity ||
+    !body.attributes.wisdom ||
+    !body.attributes.intelligence ||
+    !body.attributes.charisma
   ) {
     response
       .status(400)
@@ -65,7 +71,7 @@ app.post("/api/characters", async (request, response) => {
     return;
   }
 
-  if (isNaN(Number(body.level)) || body.level <= 0) {
+  if (isNaN(Number(body.level)) || body.level < 1) {
     response.status(400).send("The level parameter must be of type number");
     return;
   }
@@ -102,6 +108,72 @@ app.post("/api/characters", async (request, response) => {
     return;
   }
 
+  if (
+    isNaN(Number(body.attributes.constitution)) ||
+    body.attributes.constitution < 3 ||
+    body.attributes.constitution > 20
+  ) {
+    response
+      .status(400)
+      .send("The Constitution cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
+  if (
+    isNaN(Number(body.attributes.strength)) ||
+    body.attributes.strength < 3 ||
+    body.attributes.strength > 20
+  ) {
+    response
+      .status(400)
+      .send("The Strength cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
+  if (
+    isNaN(Number(body.attributes.dexterity)) ||
+    body.attributes.dexterity < 3 ||
+    body.attributes.dexterity > 20
+  ) {
+    response
+      .status(400)
+      .send("The Dexterity cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
+  if (
+    isNaN(Number(body.attributes.wisdom)) ||
+    body.attributes.wisdom < 3 ||
+    body.attributes.wisdom > 20
+  ) {
+    response
+      .status(400)
+      .send("The Wisdom cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
+  if (
+    isNaN(Number(body.attributes.intelligence)) ||
+    body.attributes.intelligence < 3 ||
+    body.attributes.intelligence > 20
+  ) {
+    response
+      .status(400)
+      .send("The Intelligence cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
+  if (
+    isNaN(Number(body.attributes.charisma)) ||
+    body.attributes.charisma < 3 ||
+    body.attributes.charisma > 20
+  ) {
+    response
+      .status(400)
+      .send("The Charisma cannot be lower than 3 or higher than 20.");
+    return;
+  }
+
   await dataAccessLayer.insertOne(body);
 
   response.status(201).send();
@@ -118,29 +190,96 @@ app.put("/api/characters/:id", async (request, response) => {
 
   if (body.name && typeof body.name !== "string") {
     response.status(400).send("The name parametr must be of type string");
+    return;
   }
-  if ((body.level && isNaN(Number(body.level))) || body.level <= 0) {
+  if (
+    (body.level && isNaN(Number(body.level))) ||
+    body.level < 1 ||
+    body.level > 20
+  ) {
     response.status(400).send("The level parameter must be of type number");
+    return;
   }
   if (body.class && typeof body.class !== "string") {
     response.status(400).send("The class parameter must be of type string");
+    return;
   }
   if (body.class && typeof body.subclass !== "string") {
-    response.status(400).send("The subclasse parameter must be of type string");
+    response.status(400).send("The subclass parameter must be of type string");
+    return;
   }
   if (body.race && typeof body.race !== "string") {
     response.status(400).send("The race parameter must be of type string");
+    return;
   }
   if (body.race && typeof body.subrace !== "string") {
     response.status(400).send("The subrace parameter must be of type string");
+    return;
   }
   if (body.background && typeof body.background !== "string") {
     response
       .status(400)
       .send("The background parameter must be of type string");
+    return;
   }
   if (body.alignment && typeof body.alignment !== "string") {
     response.status(400).send("The alignment parameter must be of type string");
+    return;
+  }
+
+  if (
+    (body.attributes.constitution &&
+      isNaN(Number(body.attributes.constitution))) ||
+    body.attributes.constitution < 3 ||
+    body.attributes.constitution > 20
+  ) {
+    response
+      .status(400)
+      .send("The constitution parameter must be of type number");
+    return;
+  }
+  if (
+    (body.attributes.strength && isNaN(Number(body.attributes.strength))) ||
+    body.attributes.strength < 3 ||
+    body.attributes.strength > 20
+  ) {
+    response.status(400).send("The strength parameter must be of type number");
+    return;
+  }
+  if (
+    (body.attributes.dexterity && isNaN(Number(body.attributes.dexterity))) ||
+    body.attributes.dexterity < 3 ||
+    body.attributes.dexterity > 20
+  ) {
+    response.status(400).send("The dexterity parameter must be of type number");
+    return;
+  }
+  if (
+    (body.attributes.wisdom && isNaN(Number(body.attributes.wisdom))) ||
+    body.attributes.wisdom < 3 ||
+    body.attributes.wisdom > 20
+  ) {
+    response.status(400).send("The wisdom parameter must be of type number");
+    return;
+  }
+  if (
+    (body.attributes.intelligence &&
+      isNaN(Number(body.attributes.intelligence))) ||
+    body.attributes.intelligence < 3 ||
+    body.attributes.intelligence > 20
+  ) {
+    response
+      .status(400)
+      .send("The intelligence parameter must be of type number");
+    return;
+  }
+  if (
+    (body.attributes.charisma && isNaN(Number(body.attributes.charisma))) ||
+    body.attributes.charisma < 3 ||
+    body.attributes.charisma > 20
+  ) {
+    response.status(400).send("The charisma parameter must be of type number");
+    return;
   }
 
   const characterQuery = {

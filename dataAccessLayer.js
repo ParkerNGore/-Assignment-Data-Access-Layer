@@ -133,6 +133,27 @@ const updateOne = function (query, newCharacter) {
     newCharacterQuery.alignment = newCharacter.alignment;
   }
 
+  if (newCharacter.attributes.constitution) {
+    newCharacterQuery.attributes.constitution =
+      newCharacter.attributes.constitution;
+  }
+  if (newCharacter.attributes.strength) {
+    newCharacterQuery.attributes.strength = newCharacter.attributes.strength;
+  }
+  if (newCharacter.attributes.dexterity) {
+    newCharacterQuery.attributes.dexterity = newCharacter.attributes.dexterity;
+  }
+  if (newCharacter.attributes.wisdom) {
+    newCharacterQuery.attributes.wisdom = newCharacter.attributes.wisdom;
+  }
+  if (newCharacter.attributes.intelligence) {
+    newCharacterQuery.attributes.intelligence =
+      newCharacter.attributes.intelligence;
+  }
+  if (newCharacter.attributes.charisma) {
+    newCharacterQuery.attributes.charisma = newCharacter.attributes.charisma;
+  }
+
   return new Promise((resolve, reject) => {
     characterCollection.updateOne(
       query,
